@@ -279,6 +279,8 @@ def on_connect(client: mqtt.Client, userdata, flags, reason_code, properties=Non
 
 def on_message(client: mqtt.Client, userdata, msg):
     key = msg.topic.rsplit("/", 1)[-1]
+    if key == "status":
+        return
     try:
         value = float(msg.payload.decode().strip())
     except ValueError:

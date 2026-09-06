@@ -1,5 +1,5 @@
 name: "Laadpaal RTU-slave"
-version: "1.0.4"
+version: "1.0.5"
 slug: "laadpaal_rtu_slave"
 description: "Modbus RTU-slave die een Inepro N380 CT-meter emuleert voor de laadpaal, gevoed via MQTT"
 url: "https://github.com/gvanhoecke/ha-laadpaal-addons"
@@ -9,6 +9,8 @@ startup: services
 boot: auto
 init: false
 usb: true
+apparmor: false
+apparmor: false
 services:
   - mqtt:want
 options:
