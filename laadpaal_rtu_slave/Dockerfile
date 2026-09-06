@@ -1,13 +1,16 @@
-ARG BUILD_FROM
-FROM $BUILD_FROM
+FROM ghcr.io/home-assistant/base:latest
 
-# Python + build-tools nodig om pymodbus/paho-mqtt te installeren op Alpine
+LABEL \
+  io.hass.version="1.0.0" \
+  io.hass.type="app" \
+  io.hass.arch="aarch64|armv7"
+
 RUN apk add --no-cache python3 py3-pip py3-wheel gcc musl-dev python3-dev libffi-dev
 
 RUN pip3 install --no-cache-dir --break-system-packages pymodbus paho-mqtt
 
-COPY run.sh /run.sh
-COPY laadpaal_rtu_slave.py /laadpaal_rtu_slave.py
+COPY run.sh /
+COPY laadpaal_rtu_slave.py /
 RUN chmod a+x /run.sh
 
 CMD [ "/run.sh" ]
