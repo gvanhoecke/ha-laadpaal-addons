@@ -1,13 +1,13 @@
 FROM ghcr.io/home-assistant/base:latest
 
 LABEL \
-  io.hass.version="1.0.0" \
+  io.hass.version="1.0.1" \
   io.hass.type="app" \
   io.hass.arch="aarch64|armv7"
 
 RUN apk add --no-cache python3 py3-pip py3-wheel gcc musl-dev python3-dev libffi-dev
 
-RUN pip3 install --no-cache-dir --break-system-packages pymodbus paho-mqtt
+RUN pip3 install --no-cache-dir --break-system-packages "pymodbus==3.11.4" paho-mqtt
 
 COPY run.sh /
 COPY laadpaal_rtu_slave.py /
