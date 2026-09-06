@@ -10,7 +10,6 @@ boot: auto
 init: false
 usb: true
 apparmor: false
-apparmor: false
 services:
   - mqtt:want
 options:
