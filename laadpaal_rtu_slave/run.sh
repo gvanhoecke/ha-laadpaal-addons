@@ -4,6 +4,7 @@ SERIAL_PORT=$(bashio::config 'serial_port')
 BAUDRATE=$(bashio::config 'baudrate')
 UNIT_ID=$(bashio::config 'unit_id')
 MQTT_BASE_TOPIC_CFG=$(bashio::config 'mqtt_base_topic')
+MONITORED_KEYS_CFG=$(bashio::config 'monitored_keys')
 
 # De 'mqtt:want' service-binding in config.yaml zorgt dat de Supervisor
 # hier automatisch de connectiegegevens van de Mosquitto-add-on aanreikt -
@@ -13,6 +14,7 @@ export MQTT_PORT=$(bashio::services mqtt "port")
 export MQTT_USER=$(bashio::services mqtt "username")
 export MQTT_PASSWORD=$(bashio::services mqtt "password")
 export MQTT_BASE_TOPIC="${MQTT_BASE_TOPIC_CFG}"
+export MONITORED_KEYS="${MONITORED_KEYS_CFG}"
 
 bashio::log.info "Geinstalleerde pymodbus-versie: $(python3 -c 'import pymodbus; print(pymodbus.__version__)')"
 bashio::log.info "Start laadpaal RTU-slave op ${SERIAL_PORT} (baud=${BAUDRATE}, unit_id=${UNIT_ID}, mqtt=${MQTT_HOST}:${MQTT_PORT})"

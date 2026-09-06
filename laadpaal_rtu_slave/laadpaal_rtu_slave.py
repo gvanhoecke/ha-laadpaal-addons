@@ -329,13 +329,15 @@ def start_heartbeat_thread(client: mqtt.Client) -> threading.Thread:
 # Watchdog: waarschuw als een waarde te lang niet vernieuwd is
 # --------------------------------------------------------------------------
 
+MONITORED_KEYS = [k.strip() for k in os.environ.get("MONITORED_KEYS", "").split(",") if k.strip()] or list(REGISTER_MAP.keys())
+
 def start_staleness_watchdog() -> threading.Thread:
     def _run():
         while True:
             time.sleep(STALE_WARNING_SECONDS)
             now = time.monotonic()
             with last_update_lock:
-                for key in REGISTER_MAP:
+                for key in MONITORED_KEYS:
                     ts = last_update.get(key)
                     if ts is None:
                         log.warning("Nog geen enkele MQTT-waarde ontvangen voor '%s'", key)
