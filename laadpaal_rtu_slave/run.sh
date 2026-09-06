@@ -14,6 +14,7 @@ export MQTT_USER=$(bashio::services mqtt "username")
 export MQTT_PASSWORD=$(bashio::services mqtt "password")
 export MQTT_BASE_TOPIC="${MQTT_BASE_TOPIC_CFG}"
 
+bashio::log.info "Geinstalleerde pymodbus-versie: $(python3 -c 'import pymodbus; print(pymodbus.__version__)')"
 bashio::log.info "Start laadpaal RTU-slave op ${SERIAL_PORT} (baud=${BAUDRATE}, unit_id=${UNIT_ID}, mqtt=${MQTT_HOST}:${MQTT_PORT})"
 
 exec python3 /laadpaal_rtu_slave.py --port "${SERIAL_PORT}" --baudrate "${BAUDRATE}" --unit-id "${UNIT_ID}"
