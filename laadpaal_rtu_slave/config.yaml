@@ -1,0 +1,24 @@
+name: "Laadpaal RTU-slave"
+version: "1.0.0"
+slug: "laadpaal_rtu_slave"
+description: "Modbus RTU-slave die een Inepro N380 CT-meter emuleert voor de laadpaal, gevoed via MQTT"
+url: ""
+arch:
+  - aarch64
+  - armv7
+startup: services
+boot: auto
+init: false
+usb: true
+services:
+  - mqtt:want
+options:
+  serial_port: "/dev/ttyUSB0"
+  baudrate: 9600
+  unit_id: 1
+  mqtt_base_topic: "laadpaal/meter"
+schema:
+  serial_port: str
+  baudrate: int
+  unit_id: int(1,247)
+  mqtt_base_topic: str
