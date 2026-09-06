@@ -330,6 +330,7 @@ def start_heartbeat_thread(client: mqtt.Client) -> threading.Thread:
 # --------------------------------------------------------------------------
 
 MONITORED_KEYS = [k.strip() for k in os.environ.get("MONITORED_KEYS", "").split(",") if k.strip()] or list(REGISTER_MAP.keys())
+log.info("Actief bewaakte keys (MONITORED_KEYS): %s", MONITORED_KEYS)
 
 def start_staleness_watchdog() -> threading.Thread:
     def _run():
